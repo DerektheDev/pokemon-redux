@@ -1,43 +1,30 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getTeam, fetchPokemonBy } from "../store/team";
+import { getPokemon, fetchPokemonBy } from "../store/pokemon";
 
 export default function Home() {
-  const types = [
-    "normal",
-    "fire",
-    "water",
-    "electric",
-    "grass",
-    "ice",
-    "fighting",
-    "poison",
-    "ground",
-    "flying",
-    "psychic",
-    "bug",
-    "rock",
-    "ghost",
-    "dragon",
-    "dark",
-    "steel",
-    "fairy",
-  ];
+  const searchKeys = ["type", "generation", "move", "ability"];
+  const [searchKey, setSearchKey] = useState(searchKeys[0]);
+  const [searchValue, setSearchValue] = useState("normal");
 
   const dispatch = useDispatch();
-  const teamFromStore = useSelector(getTeam);
+  const pokemonFromStore = useSelector(getPokemon);
 
   useEffect(() => {
-    dispatch(fetchPokemonBy("type")("fire"));
-  }, []);
+    dispatch(fetchPokemonBy(searchKey)(searchValue));
+  }, [searchKey, searchValue, dispatch]);
 
-  useEffect(() => {
-    console.log({ teamFromStore });
-  }, [teamFromStore]);
+  const onChangeSearchKey = (e) => {
+    setSearchKey(e.target.value);
+  };
+
+  const onChangeSearchValue = (e) => {
+    setSearchValue(e.target.value);
+  };
 
   return (
     <div className={styles.container}>
@@ -45,31 +32,35 @@ export default function Home() {
         <h1 className={styles.title}>Pokémon Team Builder</h1>
 
         <p>
-          Type:
-          <select name="type" id="type">
-            {types.map((type) => (
-              <option key={type} value={type}>
-                {type}
+          Search Key:
+          <select name="type" id="type" onChange={onChangeSearchKey}>
+            {searchKeys.map((searchKey) => (
+              <option key={searchKey} value={searchKey}>
+                {searchKey}
               </option>
             ))}
           </select>
         </p>
 
-        <div className={styles.grid}>
-          {/* <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        {/* <p>
+          {searchKey}:
+          <select name="type" id="type" onChange={onChangeSearchValue}>
+            {searchValues.map((searchValue) => (
+              <option key={searchValue} value={searchValue}>
+                {searchValue}
+              </option>
+            ))}
+          </select>
+        </p> */}
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a> */}
+        <div className={styles.grid}>
+          {pokemonFromStore && (
+            <ul>
+              {pokemonFromStore.map(({ pokemon }) => (
+                <li key={pokemon.name}>{pokemon.name}</li>
+              ))}
+            </ul>
+          )}
         </div>
       </main>
     </div>

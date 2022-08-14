@@ -3,23 +3,24 @@ import { createSelector } from "reselect";
 import { apiCallBegan } from "./api";
 
 const slice = createSlice({
-  name: "team",
+  name: "pokemon",
   initialState: {
     list: [],
     loading: false,
   },
   reducers: {
-    pokemonRequested: (team, action) => {
-      team.loading = true;
+    pokemonRequested: (pokemon, action) => {
+      pokemon.loading = true;
     },
 
-    pokemonReceived: (team, action) => {
-      team.list = action.payload;
-      team.loading = false;
+    pokemonReceived: (pokemon, action) => {
+      console.log(action.payload);
+      pokemon.list = action.payload.pokemon;
+      pokemon.loading = false;
     },
 
-    pokemonRequestFailed: (team, action) => {
-      team.loading = false;
+    pokemonRequestFailed: (pokemon, action) => {
+      pokemon.loading = false;
     },
   },
 });
@@ -39,8 +40,8 @@ export const fetchPokemonBy = (key) => (value) => (dispatch, getState) => {
   );
 };
 
-// memoized team
-export const getTeam = createSelector(
-  (state) => state.entities.team,
-  (team) => team.list
+// memoized pokemon
+export const getPokemon = createSelector(
+  (state) => state.entities.pokemon,
+  (pokemon) => pokemon.list
 );

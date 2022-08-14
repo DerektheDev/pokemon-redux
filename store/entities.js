@@ -1,16 +1,15 @@
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
-import teamReducer from "./team";
+import pokemonReducer from "./pokemon";
 
 const persistConfig = {
   key: "root",
   storage,
-  // whitelist: ['auth'], // only persist auth reducer
 };
 
 const entitiesReducer = combineReducers({
-  team: teamReducer,
+  pokemon: pokemonReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, entitiesReducer);
