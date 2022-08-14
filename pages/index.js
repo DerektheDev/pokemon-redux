@@ -5,16 +5,24 @@ import styles from "../styles/Home.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemon, fetchPokemonBy } from "../store/pokemon";
+import { getSearchValues, fetchSearchValuesBy } from "../store/searchValues";
 
 export default function Home() {
   const searchKeys = ["type", "generation", "move", "ability"];
+  const [searchValues, setSearchValues] = useState([]);
   const [searchKey, setSearchKey] = useState(searchKeys[0]);
   const [searchValue, setSearchValue] = useState("normal");
 
   const dispatch = useDispatch();
   const pokemonFromStore = useSelector(getPokemon);
+  const searchValuesFromStore = useSelector(getSearchValues);
 
   useEffect(() => {
+    dispatch(fetchSearchValuesBy(searchKey));
+  }, [searchKey, dispatch]);
+
+  useEffect(() => {
+    if (!searchValue) return;
     dispatch(fetchPokemonBy(searchKey)(searchValue));
   }, [searchKey, searchValue, dispatch]);
 
@@ -42,16 +50,16 @@ export default function Home() {
           </select>
         </p>
 
-        {/* <p>
+        <p>
           {searchKey}:
           <select name="type" id="type" onChange={onChangeSearchValue}>
-            {searchValues.map((searchValue) => (
-              <option key={searchValue} value={searchValue}>
-                {searchValue}
+            {searchValuesFromStore.map((searchValue) => (
+              <option key={searchValue.name} value={searchValue.name}>
+                {searchValue.name}
               </option>
             ))}
           </select>
-        </p> */}
+        </p>
 
         <div className={styles.grid}>
           {pokemonFromStore && (

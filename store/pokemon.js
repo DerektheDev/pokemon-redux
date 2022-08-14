@@ -14,7 +14,6 @@ const slice = createSlice({
     },
 
     pokemonReceived: (pokemon, action) => {
-      console.log(action.payload);
       pokemon.list = action.payload.pokemon;
       pokemon.loading = false;
     },
