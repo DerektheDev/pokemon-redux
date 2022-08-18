@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import styles from "../styles/Home.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemon, fetchPokemonBy } from "../store/pokemon";
@@ -35,41 +34,68 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>Pokémon Team Builder</h1>
+    <div>
+      <main className="max-w-2xl m-auto">
+        <h1 className="text-5xl text-center py-6">Pokémon Team Builder</h1>
 
-        <p>
-          Search Key:
-          <select name="type" id="type" onChange={onChangeSearchKey}>
-            {searchKeys.map((searchKey) => (
-              <option key={searchKey} value={searchKey}>
-                {searchKey}
-              </option>
+        <section id="team" className="gap-3 grid grid-cols-3 grid-rows-2 mb-6">
+          {Array(6)
+            .fill(0)
+            .map((item, index) => (
+              <div key={index} className="rounded bg-gray-500 p-4">
+                Test
+              </div>
             ))}
-          </select>
-        </p>
+        </section>
 
-        <p>
-          {searchKey}:
-          <select name="type" id="type" onChange={onChangeSearchValue}>
-            {searchValuesFromStore.map((searchValue) => (
-              <option key={searchValue.name} value={searchValue.name}>
-                {searchValue.name}
-              </option>
-            ))}
-          </select>
-        </p>
+        <section id="selector" className="flex gap-6 justify-center my-10">
+          <p className="flex gap-2">
+            Search Key:
+            <select
+              name="type"
+              id="type"
+              onChange={onChangeSearchKey}
+              className="capitalize border border-black rounded"
+            >
+              {searchKeys.map((searchKey) => (
+                <option key={searchKey} value={searchKey}>
+                  {searchKey}
+                </option>
+              ))}
+            </select>
+          </p>
 
-        <div className={styles.grid}>
+          <p className="flex gap-2">
+            <span className="capitalize">{searchKey}:</span>
+            <select
+              name="type"
+              id="type"
+              onChange={onChangeSearchValue}
+              className="capitalize border border-black rounded"
+            >
+              {searchValuesFromStore.map((searchValue) => (
+                <option key={searchValue.name} value={searchValue.name}>
+                  {searchValue.name?.replace(/-/, " ")}
+                </option>
+              ))}
+            </select>
+          </p>
+        </section>
+
+        <section id="pokemon-list" className="max-w-md m-auto">
           {pokemonFromStore && (
-            <ul>
+            <ul className="list-disc">
               {pokemonFromStore.map(({ pokemon }) => (
-                <li key={pokemon.name}>{pokemon.name}</li>
+                <li key={pokemon.name} className="flex mb-2 justify-between">
+                  <span className="capitalize">{pokemon.name}</span>
+                  <button className="bg-gray-400 rounded px-2">
+                    Add to Team
+                  </button>
+                </li>
               ))}
             </ul>
           )}
-        </div>
+        </section>
       </main>
     </div>
   );
