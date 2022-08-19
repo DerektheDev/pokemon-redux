@@ -5,11 +5,15 @@ import PokeApiSelectors from "../components/PokeApiSelectors";
 export default function Home() {
   return (
     <div>
-      <main className="max-w-2xl m-auto">
-        <h1 className="text-5xl text-center py-6">Pokémon Team Builder</h1>
-        <TeamGrid />
-        <PokeApiSelectors />
-        <PokemonList />
+      <h1 className="text-5xl text-center py-6">Pokémon Team Builder</h1>
+      <main className="max-w-4xl m-auto flex gap-10 justify-between px-10">
+        <div className="w-full">
+          <TeamGrid />
+        </div>
+        <div>
+          <PokeApiSelectors />
+          <PokemonList />
+        </div>
       </main>
     </div>
   );

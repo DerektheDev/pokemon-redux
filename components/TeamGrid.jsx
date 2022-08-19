@@ -12,7 +12,10 @@ const TeamGrid = () => {
   };
 
   return (
-    <section id="team" className="gap-3 grid grid-cols-3 grid-rows-2 mb-6">
+    <section
+      id="team"
+      className="gap-3 grid grid-cols-2 grid-rows-3 mb-6 sticky top-10"
+    >
       {team.map((teamMember, index) => (
         <div
           key={index}

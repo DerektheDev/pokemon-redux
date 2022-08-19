@@ -30,14 +30,17 @@ const PokeApiSelectors = () => {
   }, [searchKey, searchValue, dispatch]);
 
   return (
-    <section id="selector" className="flex gap-6 justify-center my-10">
+    <section
+      id="selector"
+      className="flex gap-6 justify-center pt-10 pb-4 sticky top-0 bg-white border-b-2 mb-4"
+    >
       <p className="flex gap-2">
         Search Key:
         <select
           name="type"
           id="type"
           onChange={onChangeSearchKey}
-          className="capitalize border border-black rounded"
+          className="capitalize border border-black rounded p-2"
         >
           {searchKeys.map((searchKey) => (
             <option key={searchKey} value={searchKey}>
@@ -53,7 +56,7 @@ const PokeApiSelectors = () => {
           name="type"
           id="type"
           onChange={onChangeSearchValue}
-          className="capitalize border border-black rounded"
+          className="capitalize border border-black rounded p-2"
         >
           {searchValuesFromStore.map((searchValue) => (
             <option key={searchValue.name} value={searchValue.name}>
