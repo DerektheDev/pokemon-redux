@@ -8,7 +8,6 @@ const PokeApiSelectors = () => {
   const searchValuesFromStore = useSelector(getSearchValues);
 
   const searchKeys = ["type", "generation", "move", "ability"];
-  const [searchValues, setSearchValues] = useState([]);
   const [searchKey, setSearchKey] = useState(searchKeys[0]);
   const [searchValue, setSearchValue] = useState("normal");
 
@@ -24,10 +23,9 @@ const PokeApiSelectors = () => {
     setSearchValue(e.target.value);
   };
 
-  useEffect(() => {
-    if (!searchValue) return;
+  const searchForPokemon = () => {
     dispatch(fetchPokemonBy(searchKey)(searchValue));
-  }, [searchKey, searchValue, dispatch]);
+  };
 
   return (
     <section
@@ -58,13 +56,19 @@ const PokeApiSelectors = () => {
           onChange={onChangeSearchValue}
           className="capitalize border border-black rounded p-2"
         >
-          {searchValuesFromStore.map((searchValue) => (
-            <option key={searchValue.name} value={searchValue.name}>
-              {searchValue.name?.replace(/-/, " ")}
-            </option>
-          ))}
+          {searchValuesFromStore.map(({ name, url }) => {
+            const searchValue = url.split("/")[url.split("/").length - 2];
+            return (
+              <option key={name} value={searchValue}>
+                {name?.replace(/-/, " ")}
+              </option>
+            );
+          })}
         </select>
       </p>
+      <button className="bg-gray-400 rounded px-2" onClick={searchForPokemon}>
+        Search
+      </button>
     </section>
   );
 };

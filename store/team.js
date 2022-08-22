@@ -14,8 +14,6 @@ const slice = createSlice({
       }
     },
     pokemanRemoved: (team, action) => {
-      console.log(parseInt(action.payload));
-
       team.list = team.list.filter(
         (pokemon) => pokemon.id !== parseInt(action.payload)
       );

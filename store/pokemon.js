@@ -14,7 +14,19 @@ const slice = createSlice({
     },
 
     pokemonReceived: (pokemon, action) => {
-      pokemon.list = action.payload.pokemon;
+      const { payload } = action;
+
+      if (payload.hasOwnProperty("pokemon")) {
+        // searching by type or ability
+        pokemon.list = payload.pokemon.map((p) => p.pokemon);
+      } else if (payload.hasOwnProperty("pokemon_species")) {
+        // searching by generation
+        pokemon.list = payload.pokemon_species;
+      } else if (payload.hasOwnProperty("learned_by_pokemon")) {
+        // searching by move
+        pokemon.list = payload.learned_by_pokemon;
+      }
+
       pokemon.loading = false;
     },
 

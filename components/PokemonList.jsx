@@ -14,12 +14,13 @@ const PokemonList = () => {
 
   return (
     <section id="pokemon-list" className="max-w-md m-auto">
-      {pokemonFromStore && (
+      {pokemonFromStore.length && (
         <ul className="list-disc">
-          {pokemonFromStore.map(({ pokemon: { name, url } }) => {
-            const pokedexNumber = url.split("/")[url.split("/").length - 2];
+          {pokemonFromStore.map(({ url, name }, index) => {
+            const pokedexNumber = url?.split("/")[url.split("/").length - 2];
+
             return (
-              <li key={name} className="flex mb-2 justify-between">
+              <li key={index} className="flex mb-2 justify-between">
                 <span className="capitalize">{name}</span>
                 <button
                   className="bg-gray-400 rounded px-2"
