@@ -29,10 +29,10 @@ const PokeApiSelectors = () => {
 
   return (
     <section
-      id="selector"
-      className="flex gap-6 justify-center pt-10 pb-4 sticky top-0 bg-white border-b-2 mb-4"
+      id="selectors"
+      className="flex gap-6 pt-10 pb-4 sticky top-0 bg-white border-b-2 mb-4 w-full justify-between"
     >
-      <p className="flex gap-2">
+      <p className="flex flex-col gap-2">
         Search Key:
         <select
           name="type"
@@ -48,7 +48,7 @@ const PokeApiSelectors = () => {
         </select>
       </p>
 
-      <p className="flex gap-2">
+      <p className="flex flex-col gap-2">
         <span className="capitalize">{searchKey}:</span>
         <select
           name="type"
@@ -66,9 +66,11 @@ const PokeApiSelectors = () => {
           })}
         </select>
       </p>
-      <button className="bg-gray-400 rounded px-2" onClick={searchForPokemon}>
-        Search
-      </button>
+      <div className="flex items-end">
+        <button className="bg-gray-400 rounded px-2" onClick={searchForPokemon}>
+          Search
+        </button>
+      </div>
     </section>
   );
 };

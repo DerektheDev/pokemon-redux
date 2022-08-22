@@ -10,7 +10,7 @@ export default function Home() {
         <div className="w-full">
           <TeamGrid />
         </div>
-        <div>
+        <div className="w-full">
           <PokeApiSelectors />
           <PokemonList />
         </div>

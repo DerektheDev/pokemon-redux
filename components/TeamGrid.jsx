@@ -14,7 +14,7 @@ const TeamGrid = () => {
   return (
     <section
       id="team"
-      className="gap-3 grid grid-cols-2 grid-rows-3 mb-6 sticky top-10"
+      className="gap-3 grid grid-cols-2 grid-rows-3 mb-6 sticky top-10 w-full"
     >
       {team.map((teamMember, index) => (
         <div
