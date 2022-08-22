@@ -56,18 +56,23 @@ const PokeApiSelectors = () => {
           onChange={onChangeSearchValue}
           className="capitalize border border-black rounded p-2"
         >
-          {searchValuesFromStore.map(({ name, url }) => {
-            const searchValue = url.split("/")[url.split("/").length - 2];
-            return (
-              <option key={name} value={searchValue}>
-                {name?.replace(/-/, " ")}
-              </option>
-            );
-          })}
+          {searchValuesFromStore.length &&
+            searchValuesFromStore.map(({ name, url }) => {
+              const searchValue = url.split("/")[url.split("/").length - 2];
+              return (
+                <option key={name} value={searchValue}>
+                  {name?.replace(/-/, " ")}
+                </option>
+              );
+            })}
         </select>
       </p>
       <div className="flex items-end">
-        <button className="bg-gray-400 rounded px-2" onClick={searchForPokemon}>
+        <button
+          className="bg-gray-400 rounded px-2"
+          onClick={searchForPokemon}
+          name="search"
+        >
           Search
         </button>
       </div>
