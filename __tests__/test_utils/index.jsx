@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 // import { configureStore } from "@reduxjs/toolkit";
-import configureAppStore from "../store/configureStore";
+import configureAppStore from "../../store/configureStore";
 import { Provider } from "react-redux";
 // As a basic setup, import your same slice reducers
 // import userReducer from "../features/users/userSlice";

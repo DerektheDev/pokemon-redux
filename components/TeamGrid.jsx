@@ -8,6 +8,10 @@ const TeamGrid = () => {
 
   const removeTeamMember = (e) => {
     const { pokedexNumber } = e.target.dataset;
+
+    console.log(e.target.dataset);
+    console.log({ pokedexNumber });
+
     dispatch(removePokemanFromTeam(pokedexNumber));
   };
 
@@ -19,6 +23,7 @@ const TeamGrid = () => {
       {team.map((teamMember, index) => (
         <div
           key={index}
+          data-testid="team-member"
           className="rounded bg-gray-500 p-4 pt-0 flex flex-col text-center text-white"
         >
           <div className="shrink-0 text-center">
@@ -35,6 +40,7 @@ const TeamGrid = () => {
               className="border border-gray-400 py-0 px-2 rounded bg-red-800 text-xs"
               onClick={removeTeamMember}
               data-pokedex-number={teamMember.id}
+              data-testid="remove-team-member-button"
             >
               X
             </button>

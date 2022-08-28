@@ -35,13 +35,18 @@ const PokeApiSelectors = () => {
       <p className="flex flex-col gap-2">
         Search Key:
         <select
-          name="type"
-          id="type"
+          name="search-key-select"
+          id="search-key-select"
+          data-testid="search-key-select"
           onChange={onChangeSearchKey}
           className="capitalize border border-black rounded p-2"
         >
           {searchKeys.map((searchKey) => (
-            <option key={searchKey} value={searchKey}>
+            <option
+              key={searchKey}
+              value={searchKey}
+              data-testid="search-key-option"
+            >
               {searchKey}
             </option>
           ))}
@@ -49,10 +54,13 @@ const PokeApiSelectors = () => {
       </p>
 
       <p className="flex flex-col gap-2">
-        <span className="capitalize">{searchKey}:</span>
+        <span className="capitalize" data-testid="search-key">
+          {searchKey}:
+        </span>
         <select
-          name="type"
-          id="type"
+          name="search-value-select"
+          id="search-value-select"
+          data-testid="search-value-select"
           onChange={onChangeSearchValue}
           className="capitalize border border-black rounded p-2"
         >
@@ -60,7 +68,11 @@ const PokeApiSelectors = () => {
             searchValuesFromStore.map(({ name, url }) => {
               const searchValue = url.split("/")[url.split("/").length - 2];
               return (
-                <option key={name} value={searchValue}>
+                <option
+                  key={name}
+                  value={searchValue}
+                  data-testid="search-value-option"
+                >
                   {name?.replace(/-/, " ")}
                 </option>
               );

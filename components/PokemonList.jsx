@@ -25,6 +25,7 @@ const PokemonList = () => {
                 <button
                   className="bg-gray-400 rounded px-2"
                   data-pokedex-number={pokedexNumber}
+                  data-testid="add-team-member-button"
                   onClick={addToTeam}
                 >
                   Add to Team
